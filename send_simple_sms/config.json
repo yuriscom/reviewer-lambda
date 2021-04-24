@@ -1,0 +1,6 @@
+{
+  "TEST_REQUEST": {
+    "pn": "+111111",
+    "msg": "Hi. This is automated message from AWS service. Test by Yuri..."
+  }
+}

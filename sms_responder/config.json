@@ -1,0 +1,11 @@
+{
+  "TEST_REQUEST": {
+    "Records": [
+      {
+        "Sns": {
+          "Message": "{\"originationNumber\":\"+1111111\",\"destinationNumber\":\"+1111111\",\"messageKeyword\":\"keyword_381541571067\",\"messageBody\":\"3\",\"inboundMessageId\":\"d2ee59f1-4784-59e7-94e5-01b58f00bc8b\",\"previousPublishedMessageId\":\"3621d200-ea7b-5331-9050-8a44223ef5b1\"}"
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "name": "smser",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "md5": "^2.3.0",
+    "pg": "^8.5.1"
+  }
+}
