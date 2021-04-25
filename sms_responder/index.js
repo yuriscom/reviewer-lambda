@@ -1,4 +1,4 @@
-require('dotenv').config()
+require('dotenv').config();
 let config = {}
 
 try {
@@ -77,7 +77,7 @@ let sanitize = function (message) {
 let validateUser = async function (sanitizedMessage) {
   let {originationNumber, text} = sanitizedMessage;
 
-  let sql = "select p.id as patient_id, p.phone, p.status as patient_status, v.id as visit_id, v.visited_on, v.status as visit_status \n" +
+  let sql = "select p.id as patient_id, p.phone, p.status as patient_status, v.id as visit_id, v.visited_on, v.status as visit_status, v.hash as visit_hash\n" +
     "from patient p \n" +
     "join visit v on p.id=v.patient_id \n" +
     "where p.status = 'SENT' \n" +
@@ -115,7 +115,7 @@ let parseReview = async function (sanitizedMessage, user, hash, hashUrl) {
     return null;
   }
 
-  let link = `http://reputation-manager.com/${hashUrl}`
+  let link = `${getEnvVar('WEB_URL')}/#/${hashUrl}`
 
   switch (rating) {
     case 1:
@@ -190,7 +190,8 @@ exports.handler = async function (request, context, callback) {
         try {
           let sanitizedMessage = sanitize(message);
           let user = await validateUser(sanitizedMessage);
-          let hash = makeHash(6);
+          // let hash = makeHash(6);
+          let hash = user.visit_hash;
           let hashUrl = generateHashUrl(user, hash);
           let responseMessage = await parseReview(sanitizedMessage, user, hash, hashUrl);
           await sendResponse(responseMessage, user.phone);
