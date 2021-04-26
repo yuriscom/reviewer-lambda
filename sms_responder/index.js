@@ -198,6 +198,7 @@ exports.handler = async function (request, context, callback) {
           requestResponse.body.hash = hashUrl;
         } catch (e) {
           console.error(e.message);
+          throw e;
         }
       }
     }
