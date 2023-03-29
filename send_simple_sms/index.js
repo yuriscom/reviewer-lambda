@@ -39,6 +39,12 @@ exports.handler = async (event) => {
   var params = {
     Message: event.msg,
     PhoneNumber: event.pn,
+    MessageAttributes: {
+      'AWS.SNS.SMS.SMSType': {
+        DataType: 'String',
+        StringValue: 'Transactional'
+      }
+    }
   };
 
   console.log(`${event.msg}`)

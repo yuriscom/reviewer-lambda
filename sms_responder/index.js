@@ -77,10 +77,10 @@ let sanitize = function (message) {
 let validateUser = async function (sanitizedMessage) {
   let {originationNumber, text} = sanitizedMessage;
 
-  let sql = "select p.id as patient_id, p.phone, p.status as patient_status, v.id as visit_id, v.visited_on, v.status as visit_status, v.hash as visit_hash\n" +
+  let sql = "select p.id as patient_id, p.phone, p.status as patient_status, v.id as visit_id, v.visited_on, v.status as visit_status, v.hash as visit_hash, p.sample_id\n" +
     "from patient p \n" +
     "join visit v on p.id=v.patient_id \n" +
-    "where p.status = 'SENT' \n" +
+    "where p.status in ('SENT', 'SEEN') \n" +
     "and v.status = 'PROCESSED' \n" +
     `and p.phone ='${originationNumber}'`
 
@@ -161,6 +161,12 @@ let sendResponse = async function(message, phone) {
   let params = {
     Message: message,
     PhoneNumber: phone,
+    MessageAttributes: {
+      'AWS.SNS.SMS.SMSType': {
+        DataType: 'String',
+        StringValue: 'Transactional'
+      }
+    }
   };
 
   // send
@@ -194,7 +200,10 @@ exports.handler = async function (request, context, callback) {
           let hash = user.visit_hash;
           let hashUrl = generateHashUrl(user, hash);
           let responseMessage = await parseReview(sanitizedMessage, user, hash, hashUrl);
-          await sendResponse(responseMessage, user.phone);
+
+          if (user.sample_id == 1) {
+            await sendResponse(responseMessage, user.phone);
+          }
           requestResponse.body.hash = hashUrl;
         } catch (e) {
           console.error(e.message);

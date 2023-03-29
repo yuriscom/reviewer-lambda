@@ -1,0 +1,40 @@
+{
+  "TEST_REQUEST": {
+    "Records": [
+      {
+        "eventVersion": "2.1",
+        "eventSource": "aws:s3",
+        "awsRegion": "us-east-1",
+        "eventTime": "2021-07-26T22:33:53.898Z",
+        "eventName": "ObjectCreated:Put",
+        "userIdentity": {
+          "principalId": "AWS:AIDAIJ4IAAJY5ENHAWJCY"
+        },
+        "requestParameters": {
+          "sourceIPAddress": "99.228.68.93"
+        },
+        "responseElements": {
+          "x-amz-request-id": "GATBST4MQEV4E8HE",
+          "x-amz-id-2": "Wrypn1o4h1v3uEGRTGd0SqsL08fLUHeyn02p+IFeKP0dqXJqzHJx0qq0gsut5k7nYanoaysaof3yUwnKx5GdAY8YCj3Ww4zT"
+        },
+        "s3": {
+          "s3SchemaVersion": "1.0",
+          "configurationId": "visitors data added",
+          "bucket": {
+            "name": "reviewer-dev",
+            "ownerIdentity": {
+              "principalId": "A1A9SZY0289UG5"
+            },
+            "arn": "arn:aws:s3:::reviewer-dev"
+          },
+          "object": {
+            "key": "visitors/import_2021-08-20_17%3A45%3A15.csv",
+            "size": 295,
+            "eTag": "18a19547ec920453a76bc5f1d2624dab",
+            "sequencer": "0060FF38530F360EA8"
+          }
+        }
+      }
+    ]
+  }
+}
